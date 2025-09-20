@@ -98,7 +98,10 @@
 <link rel="canonical" href="{{ $url }}"/>
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"/>
 
-{{-- Open Graph --}}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
 <meta property="og:type" content="product"/>
 <meta property="og:title" content="{{ $title }}"/>
 <meta property="og:description" content="{{ $description }}"/>
@@ -113,7 +116,6 @@
 <meta name="twitter:title" content="{{ $title }}"/>
 <meta name="twitter:description" content="{{ $description }}"/>
 <meta name="twitter:image" content="{{ $image }}"/>
-
 
 <script type="application/ld+json">
 {!! json_encode($ld, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE) !!}
@@ -156,7 +158,7 @@
 </head>
 
 <body>
-  {{-- NAVBAR --}}
+
   <nav id="navbar" class="navbar navbar-expand-lg fixed-top">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center gap-2" href="{{ route('homePage') }}">
@@ -424,7 +426,6 @@
 
     <h3>Meta</h3>
     <div class="kv">
-      <div><b>ID</b>{{ $product->id }}</div>
       <div><b>Publicación</b>{{ $product->created_at->format('d/m/Y') }}</div>
       <div><b>Actualización</b>{{ $product->updated_at->format('d/m/Y') }}</div>
       <div><b>Slug</b>{{ $product->slug }}</div>
@@ -440,6 +441,8 @@
       @if($product->contact_email)
       <a class="chip" href="mailto:{{ $product->contact_email }}">✉️ Correo</a>
       @endif
+
+      <a class="chip"  href="{{ route('appointment-visit',$product->slug) }}">📆 Agendar cita</a>
     </div>
   </aside>
 

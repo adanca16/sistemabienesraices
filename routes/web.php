@@ -18,11 +18,14 @@ Route::get('/register', function () {
     abort(404);
 });
 
-Route::get('/home', function(){ return redirect()->route('products.index'); });
+Route::get('/contact/appointment/{SLUG}', [ContactController::class, 'appointment'])->name('appointment-visit');
+
 
 //Route::resource('products', ProductController::class);
 
 Route::middleware('auth')->group(function () {
+  
+Route::get('/home', function(){ return redirect()->route('products.index'); });
     Route::resource('products', ProductController::class);
   Route::resource('users', UserController::class);
     Route::get('/contactMessages', [ContactMessageController::class, 'index'])

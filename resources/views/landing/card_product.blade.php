@@ -12,7 +12,7 @@
                 <p class="card-text">
                 {{$p->summary}}
                 </p>
-                <p class="price">{{number_format($p->price_crc,2)}}</p>
+                <p class="price">₡{{number_format($p->price_crc,2)}}</p>
               </div>
               <a href="{{route('product-detail', $p->slug)}}" class="btn btn-secondary mt-auto">Detalles</a>
             </div>
