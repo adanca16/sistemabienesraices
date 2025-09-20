@@ -14,7 +14,7 @@ return '';
   </div>
 
   <nav class="nav flex-column gap-1">
-    <a class="nav-link {{ isActive(['dashboard']) }}" href="{{ route('homePage') }}">
+    <a target="_blank" class="nav-link {{ isActive(['dashboard']) }}" href="{{ route('homePage') }}">
       <i class="bi bi-speedometer2 me-1"></i> Ver P&aacute;gina
     </a>
 
