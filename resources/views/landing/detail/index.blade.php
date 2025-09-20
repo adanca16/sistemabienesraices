@@ -442,7 +442,7 @@
       <a class="chip" href="mailto:{{ $product->contact_email }}">✉️ Correo</a>
       @endif
 
-      <a class="chip"  href="{{ route('reservations.create',$product->slug) }}">📆 Agendar cita</a>
+      <a class="chip"  href="{{ route('reservations.createUser',$product->slug) }}">📆 Agendar cita</a>
     </div>
   </aside>
 

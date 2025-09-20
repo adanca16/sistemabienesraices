@@ -119,7 +119,7 @@
       </div>
       @endif
 
-      <form method="POST" action="{{ route('reservations.store') }}">
+      <form method="POST" action="{{ route('reservations.storeUser') }}">
         @csrf
         <div class="container p-2 mt-0">
           <div class="row">

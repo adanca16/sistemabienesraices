@@ -23,8 +23,8 @@ Route::get('/register', function () {
 Route::get('/contact/appointment/{SLUG}', [ContactController::class, 'appointment'])->name('appointment-visit');
 
 
-Route::get('/reservations/create/{SLUG}', [ReservationController::class, 'create'])->name('reservations.create');
-Route::post('/reservations',         [ReservationController::class, 'store'])->name('reservations.store');
+Route::get('/reservations/create/{SLUG}', [ReservationController::class, 'create'])->name('reservations.createUser');
+Route::post('/reservations',         [ReservationController::class, 'store'])->name('reservations.storeUser');
 Route::get('/reservations/success',  [ReservationController::class, 'success'])->name('reservations.success');
 
 
@@ -37,7 +37,6 @@ Route::middleware('auth')->group(function () {
   });
 
   Route::resource('reservations', ReservationAdminController::class);
-
     Route::get('/reservations/events/list',
         [ReservationAdminController::class, 'events']
     )->name('reservations.events.list');
