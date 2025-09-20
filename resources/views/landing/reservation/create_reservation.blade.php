@@ -10,13 +10,13 @@
   <!-- Primary Meta Tags -->
 <title>Reservar visita a propiedad Casa en remate</title>
 <meta name="title" content="Reservar visita a propiedad Casa en remate" />
-<meta name="description" content="Agenda una visita para conocer esta {{$product->property_type}} en {{$product->address_line}}. Coordina tu cita en el horario que prefieras y resuelve todas tus dudas durante un recorrido guiado. Atención rápida por WhatsApp y asesoría sin costo." />
+<meta name="description" content="Agenda una visita para conocer esta {{$product->property_type}} ubicada en {{$product->address_line}}. Coordina tu cita en el horario que prefieras y resuelve todas tus dudas durante un recorrido guiado. Atención rápida por WhatsApp y asesoría sin costo." />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
 <meta property="og:url" content="{{ route('reservations.createUser',$product->slug) }}" />
 <meta property="og:title" content="Reservar visita a propiedad Casa en remate" />
-<meta property="og:description" content="Agenda una visita para conocer esta {{$product->property_type}} en {{$product->address_line}}. Coordina tu cita en el horario que prefieras y resuelve todas tus dudas durante un recorrido guiado. Atención rápida por WhatsApp y asesoría sin costo." />
+<meta property="og:description" content="Agenda una visita para conocer esta {{$product->property_type}} ubicada en {{$product->address_line}}. Coordina tu cita en el horario que prefieras y resuelve todas tus dudas durante un recorrido guiado. Atención rápida por WhatsApp y asesoría sin costo." />
 @if($product->coverPhoto)
 <meta property="og:image" content="{{ $product->coverPhoto->publicUrl() }}" />
 @endif
