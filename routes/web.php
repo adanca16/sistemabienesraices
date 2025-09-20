@@ -23,9 +23,9 @@ Route::get('/register', function () {
 Route::get('/contact/appointment/{SLUG}', [ContactController::class, 'appointment'])->name('appointment-visit');
 
 
-Route::get('/reservations/create/{SLUG}', [ReservationController::class, 'create'])->name('reservations.createUser');
-Route::post('/reservations',         [ReservationController::class, 'store'])->name('reservations.storeUser');
-Route::get('/reservations/success',  [ReservationController::class, 'success'])->name('reservations.success');
+Route::get('/appointment/create/{SLUG}', [ReservationController::class, 'create'])->name('reservations.createUser');
+Route::post('/appointment/user/store',         [ReservationController::class, 'store'])->name('reservations.user.store');
+Route::get('/appointment/success',  [ReservationController::class, 'success'])->name('reservations.success');
 
 
 
@@ -36,19 +36,14 @@ Route::middleware('auth')->group(function () {
     return redirect()->route('products.index');
   });
 
-  Route::resource('reservations', ReservationAdminController::class);
+  Route::resource('reservations', ReservationAdminController::class)->except(['create']);;
     Route::get('/reservations/events/list',
         [ReservationAdminController::class, 'events']
     )->name('reservations.events.list');
-  // Route::get('/reservations',        [ReservationAdminController::class, 'index'])->name('reservations.index');
 
-  // 
 
   Route::get('/reservations/detail', [ReservationAdminController::class, 'show'])
      ->name('reservations.showEvent');
-  // Route::patch('/reservations/{reservation}', [ReservationAdminController::class, 'update'])
-  //   ->name('reservations.update');
-
 
   Route::resource('products', ProductController::class);
   Route::resource('users', UserController::class);
