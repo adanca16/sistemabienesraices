@@ -3,7 +3,7 @@
 @section('title','Detalle de Reserva · '.config('app.name'))
 
 @section('content')
-<div class="container p-4">
+<div class="col p-0">
     <div class="card p-4">
         <h1 class="mb-3">Detalle de la reserva #{{ $reservation->id }}</h1>
 
