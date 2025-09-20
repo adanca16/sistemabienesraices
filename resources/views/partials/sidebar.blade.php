@@ -31,6 +31,11 @@ return '';
 </a>
 
 
+<a class="nav-link {{ isActive(['users.index']) }}" href="{{ route('users.index') }}">
+    <i class="bi bi-person me-1"></i> Usuarios
+</a>
+
+
 
     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
       {{ Auth::user()->name }}
