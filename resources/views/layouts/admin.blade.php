@@ -36,7 +36,7 @@
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNav">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="topNav">
+      <div class="collapse navbar-collapse" id="topNavItem">
         <ul class="navbar-nav ms-auto">
           @yield('top-actions')
         </ul>
@@ -45,9 +45,9 @@
   </nav>
 
   {{-- Contenedor con sidebar izquierda + contenido --}}
-  <div class="container-fluid app-main">
+  <div class="container-fluid app-main " >
     <div class="row">
-      <aside class="col-12 col-lg-3 col-xl-2 sidebar">
+      <aside class="col-12 col-lg-3 col-xl-2 sidebar" id="topNav">
         @include('partials.sidebar') {{-- <= Parcial reutilizable --}}
       </aside>
 

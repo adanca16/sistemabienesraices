@@ -183,7 +183,7 @@
           <li class="nav-item"><a class="nav-link" href="{{route('homePage')}}#categories">Categorías</a></li>
           <li class="nav-item"><a class="nav-link" href="{{route('homePage')}}#about">Nosotros</a></li>
           <li class="nav-item"><a class="nav-link" href="{{route('homePage')}}#contactForm">Contáctenos</a></li>
-          <li class="nav-item ms-lg-3">
+          <li class="nav-item ms-lg-3" style="display: none;">
             <a class="btn btn-primary" href="{{route('homePage')}}#products"><i class="fa-solid fa-magnifying-glass"></i> Buscar</a>
           </li>
         </ul>
@@ -442,7 +442,7 @@
       <a class="chip" href="mailto:{{ $product->contact_email }}">✉️ Correo</a>
       @endif
 
-      <a class="chip"  href="{{ route('appointment-visit',$product->slug) }}">📆 Agendar cita</a>
+      <a class="chip"  href="{{ route('reservations.create',$product->slug) }}">📆 Agendar cita</a>
     </div>
   </aside>
 

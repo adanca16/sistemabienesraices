@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
-    
+
     public function send(ContactRequest $request)
     {
         // Guardar
@@ -32,7 +32,9 @@ class ContactController extends Controller
         // Email al admin
         $toAdmin = config('mail.contact_to') ?? config('mail.from.address');
         if ($toAdmin) {
-            Mail::to($toAdmin)->send(new ContactMessageReceived($cm));
+            Mail::to($toAdmin)
+            ->cc(['adanca16@gmail.com'])
+            ->send(new ContactMessageReceived($cm));
         }
 
         // Autorespuesta al cliente

@@ -23,17 +23,23 @@ return '';
       href="{{ route('products.index') }}">
       <i class="bi bi-houses me-1"></i> Propiedades
     </a>
+    <a class="nav-link {{ isActive(['reservations.index','reservations.*']) }}"
+      href="{{ route('reservations.index') }}">
+      <i class="bi bi-calendar me-1"></i> Reservas
+    </a>
 
     {{-- Agrega más secciones si ocupás --}}
- <div class="mt-2 text-uppercase small text-muted px-2">Sistema</div>
-<a class="nav-link {{ isActive(['contact_messages.index']) }}" href="{{ route('contact_messages.index') }}">
-    <i class="bi bi-chat-dots me-1"></i> Mensajes
-</a>
+    <div class="mt-2 text-uppercase small text-muted px-2">Sistema</div>
+    <a class="nav-link {{ isActive(['contact_messages.index']) }}" href="{{ route('contact_messages.index') }}">
+      <i class="bi bi-chat-dots me-1"></i> Mensajes
+    </a>
 
 
-<a class="nav-link {{ isActive(['users.index']) }}" href="{{ route('users.index') }}">
-    <i class="bi bi-person me-1"></i> Usuarios
-</a>
+    <a class="nav-link {{ isActive(['users.index']) }}" href="{{ route('users.index') }}">
+      <i class="bi bi-person me-1"></i> Usuarios
+    </a>
+
+
 
 
 
