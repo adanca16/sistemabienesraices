@@ -3,17 +3,41 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Reservar visita a propiedad {{$product->title}}</title>
+  <link rel="shortcut icon" href="{{asset('icono.png')}}" type="image/x-icon">
+  <title>{{ config('app.site', config('app.name')) }} — Reservar visita {{$product->title}}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Primary Meta Tags -->
+<title>Reservar visita a propiedad Casa en remate</title>
+<meta name="title" content="Reservar visita a propiedad Casa en remate" />
+<meta name="description" content="Agenda una visita para conocer esta {{$product->property_type}} en {{$product->address_line}}. Coordina tu cita en el horario que prefieras y resuelve todas tus dudas durante un recorrido guiado. Atención rápida por WhatsApp y asesoría sin costo." />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="{{ route('reservations.createUser',$product->slug) }}" />
+<meta property="og:title" content="Reservar visita a propiedad Casa en remate" />
+<meta property="og:description" content="Agenda una visita para conocer esta {{$product->property_type}} en {{$product->address_line}}. Coordina tu cita en el horario que prefieras y resuelve todas tus dudas durante un recorrido guiado. Atención rápida por WhatsApp y asesoría sin costo." />
+@if($product->coverPhoto)
+<meta property="og:image" content="{{ $product->coverPhoto->publicUrl() }}" />
+@endif
+<!-- X (Twitter) -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content="{{ route('reservations.createUser',$product->slug) }}" />
+<meta property="twitter:title" content="Reservar visita a propiedad Casa en remate" />
+<meta property="twitter:description" content="Agenda una visita para conocer esta {{$product->property_type}} en {{$product->address_line}}. Coordina tu cita en el horario que prefieras y resuelve todas tus dudas durante un recorrido guiado. Atención rápida por WhatsApp y asesoría sin costo." />
+@if($product->coverPhoto)
+<meta property="twitter:image" content="{{ $product->coverPhoto->publicUrl() }}" />
+@endif
+<!-- Meta Tags Generated with https://metatags.io -->
 
   {{-- Estilos mínimos --}}
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
- <link
+  <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
     rel="stylesheet"
     crossorigin="anonymous" />
-    
+
   <style>
     body {
       font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
@@ -124,81 +148,81 @@
         <div class="container p-2 mt-0">
           <div class="row">
             <div class="col p-1">
-          {{-- Propiedad --}}
-          <div class="col-12">
+              {{-- Propiedad --}}
+              <div class="col-12">
 
-            <div class="col-12">
-              @if($product->coverPhoto)
-              <img class="img-fluid d-block mx-auto" id="mainImage" src="{{ $product->coverPhoto->publicUrl() }}" alt="{{ $product->title }}">
-              @elseif($product->photos->count())
-              <img class="img-fluid d-block mx-auto" id="mainImage" src="{{ $product->photos->first()->publicUrl() }}" alt="{{ $product->title }}">
-              @endif
+                <div class="col-12">
+                  @if($product->coverPhoto)
+                  <img class="img-fluid d-block mx-auto" id="mainImage" src="{{ $product->coverPhoto->publicUrl() }}" alt="{{ $product->title }}">
+                  @elseif($product->photos->count())
+                  <img class="img-fluid d-block mx-auto" id="mainImage" src="{{ $product->photos->first()->publicUrl() }}" alt="{{ $product->title }}">
+                  @endif
+                </div>
+                <label for="property_id">{{$product->title}}</label>
+                <p>{{$product->summary}}</p>
+                <p>{{$product->description}}</p>
+
+                <input id="property_id" name="property_id" value="{{$propertyId}}" style="display: none;">
+
+              </div>
+
+              {{-- Tipo --}}
+              <div class="col-12">
+                <label for="type">Tipo de reservación</label>
+                <select id="type" name="type" required class="form-control">
+                  @php $types = ['visit' => 'Visita presencial', 'virtual' => 'Visita virtual', 'call' => 'Llamada']; @endphp
+                  <option value="">Seleccione…</option>
+                  @foreach($types as $val => $label)
+                  <option value="{{ $val }}" @selected(old('type')===$val)>{{ $label }}</option>
+                  @endforeach
+                </select>
+                @error('type') <div class="error">{{ $message }}</div> @enderror
+              </div>
+
+              {{-- Nombre --}}
+              <div class="col-12">
+                <label for="interested_name">Nombre completo</label>
+                <input id="interested_name" name="interested_name" type="text" value="{{ old('interested_name') }}" required>
+                @error('interested_name') <div class="error">{{ $message }}</div> @enderror
+              </div>
+
+              {{-- Email --}}
+              <div class="col-12">
+                <label for="interested_email">Correo electrónico</label>
+                <input id="interested_email" name="interested_email" type="email" value="{{ old('interested_email') }}">
+                @error('interested_email') <div class="error">{{ $message }}</div> @enderror
+              </div>
+
+              {{-- Teléfono --}}
+              <div class="col-12">
+                <label for="interested_phone">Teléfono</label>
+                <input id="interested_phone" name="interested_phone" type="text" value="{{ old('interested_phone') }}">
+                @error('interested_phone') <div class="error">{{ $message }}</div> @enderror
+              </div>
+
+              {{-- Calendario (fecha y hora) --}}
+              <div class="col-12">
+                <label for="reserved_at">Fecha y hora</label>
+                <input id="reserved_at" name="reserved_at" type="text" placeholder="Selecciona fecha y hora" value="{{ old('reserved_at') }}" required>
+                <div class="help">Usa el calendario para elegir la fecha y hora de la visita.</div>
+                @error('reserved_at') <div class="error">{{ $message }}</div> @enderror
+              </div>
+
+              {{-- Duración --}}
+              <div>
+                <label for="duration_minutes">Duración (minutos)</label>
+                <input id="duration_minutes" name="duration_minutes" type="number" min="15" max="240" step="15" value="{{ old('duration_minutes', 30) }}">
+                @error('duration_minutes') <div class="error">{{ $message }}</div> @enderror
+              </div>
+
+              {{-- Notas --}}
+              <div class="grid-2" style="grid-column: 1 / -1">
+                <div class="col-12">
+                  <label for="notes">Notas</label>
+                  <textarea id="notes" name="notes" rows="4" placeholder="Comentarios adicionales…">{{ old('notes') }}</textarea>
+                </div>
+              </div>
             </div>
-            <label for="property_id">{{$product->title}}</label>
-             <p>{{$product->summary}}</p>
-               <p>{{$product->description}}</p>
-               
-            <input id="property_id" name="property_id" value="{{$propertyId}}" style="display: none;">
-
-          </div>
-
-          {{-- Tipo --}}
-          <div class="col-12">
-            <label for="type">Tipo de reservación</label>
-            <select id="type" name="type" required class="form-control">
-              @php $types = ['visit' => 'Visita presencial', 'virtual' => 'Visita virtual', 'call' => 'Llamada']; @endphp
-              <option value="">Seleccione…</option>
-              @foreach($types as $val => $label)
-              <option value="{{ $val }}" @selected(old('type')===$val)>{{ $label }}</option>
-              @endforeach
-            </select>
-            @error('type') <div class="error">{{ $message }}</div> @enderror
-          </div>
-
-          {{-- Nombre --}}
-          <div class="col-12">
-            <label for="interested_name">Nombre completo</label>
-            <input id="interested_name" name="interested_name" type="text" value="{{ old('interested_name') }}" required>
-            @error('interested_name') <div class="error">{{ $message }}</div> @enderror
-          </div>
-
-          {{-- Email --}}
-          <div class="col-12">
-            <label for="interested_email">Correo electrónico</label>
-            <input id="interested_email" name="interested_email" type="email" value="{{ old('interested_email') }}">
-            @error('interested_email') <div class="error">{{ $message }}</div> @enderror
-          </div>
-
-          {{-- Teléfono --}}
-          <div class="col-12">
-            <label for="interested_phone">Teléfono</label>
-            <input id="interested_phone" name="interested_phone" type="text" value="{{ old('interested_phone') }}">
-            @error('interested_phone') <div class="error">{{ $message }}</div> @enderror
-          </div>
-
-          {{-- Calendario (fecha y hora) --}}
-          <div class="col-12">
-            <label for="reserved_at">Fecha y hora</label>
-            <input id="reserved_at" name="reserved_at" type="text" placeholder="Selecciona fecha y hora" value="{{ old('reserved_at') }}" required>
-            <div class="help">Usa el calendario para elegir la fecha y hora de la visita.</div>
-            @error('reserved_at') <div class="error">{{ $message }}</div> @enderror
-          </div>
-
-          {{-- Duración --}}
-          <div>
-            <label for="duration_minutes">Duración (minutos)</label>
-            <input id="duration_minutes" name="duration_minutes" type="number" min="15" max="240" step="15" value="{{ old('duration_minutes', 30) }}">
-            @error('duration_minutes') <div class="error">{{ $message }}</div> @enderror
-          </div>
-
-          {{-- Notas --}}
-          <div class="grid-2" style="grid-column: 1 / -1">
-            <div class="col-12">
-              <label for="notes">Notas</label>
-              <textarea id="notes" name="notes" rows="4" placeholder="Comentarios adicionales…">{{ old('notes') }}</textarea>
-            </div>
-          </div>
-        </div>
 
           </div>
         </div>
