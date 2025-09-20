@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'site' => 'TE LO VENDO CR',
+    'site' => 'BIENES TITO',
 
     'name' => env('APP_NAME', 'Laravel'),
 
