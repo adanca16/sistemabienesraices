@@ -9,6 +9,7 @@
     $image    = $product->coverPhoto?->publicUrl()
                 ?? ($product->photos->first()?->publicUrl() ?? asset('img/fallback-property.jpg'));
 
+
     // Title (prioriza SEO title si existe)
     $title = $product->seo_title
         ? Str::limit($product->seo_title, 65, '…')
@@ -83,7 +84,7 @@
         '@type'    => 'BreadcrumbList',
         'itemListElement' => [
             ['@type'=>'ListItem','position'=>1,'name'=>'Inicio','item'=>url('/')],
-            ['@type'=>'ListItem','position'=>2,'name'=>'Propiedades','item'=>route('products.index')],
+            ['@type'=>'ListItem','position'=>2,'name'=>'Propiedades','item'=>route('homePage')],
             ['@type'=>'ListItem','position'=>3,'name'=>$product->title,'item'=>$url],
         ],
     ];

@@ -2,6 +2,8 @@
 <html lang="es">
 
 <head>
+
+  @yield('headerMetadata')
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -9,7 +11,6 @@
 
   <title>{{ config('app.site', config('app.name')) }} — Venta de Bienes Raíces en Costa Rica</title>
 
-    @yield('headerMetadata')
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
     rel="stylesheet"
@@ -29,13 +30,13 @@
 
   <style>
     #hero {
-    padding: 7rem 0 4rem;
-    background: url('{{asset("uploads/cover.png")}}') center/cover no-repeat;
-    position: relative;
-    color: #fff;
-}
+      padding: 7rem 0 4rem;
+      background: url('{{asset("uploads/cover.png")}}') center/cover no-repeat;
+      position: relative;
+      color: #fff;
+    }
   </style>
-  </head>
+</head>
 
 <body>
   {{-- NAVBAR --}}
@@ -59,7 +60,7 @@
           <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{route('homePage')}}">Inicio</a></li>
           <li class="nav-item"><a class="nav-link" href="{{route('homePage')}}#new-arrivals">Otras</a></li>
           <li class="nav-item"><a class="nav-link" href="{{route('homePage')}}#products">Nuevas</a></li>
-   
+
           <li class="nav-item"><a class="nav-link" href="{{route('homePage')}}#categories">Categorías</a></li>
           <li class="nav-item"><a class="nav-link" href="{{route('homePage')}}#about">Nosotros</a></li>
           <li class="nav-item"><a class="nav-link" href="{{route('homePage')}}#contactForm">Contáctenos</a></li>
