@@ -71,6 +71,11 @@
   }
 </style>
 </head>
+@if (session('success'))
+<div class="alert alert-success mt-3" role="alert">
+  {{ session('success') }}
+</div>
+@endif
 
 
 <div class="card mt-0 p-3">

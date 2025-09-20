@@ -49,7 +49,7 @@ class ReservationAdminController extends Controller
         $start = $request->query('start'); // ISO
         $end   = $request->query('end');   // ISO
 
-        $query = Reservation::with('property')->where('status', '!=', 'cancelled');
+        $query = Reservation::with('property')->where('status', '!=', 'deleted');
 
         if ($start && $end) {
             $query->between($start, $end);
@@ -74,4 +74,17 @@ class ReservationAdminController extends Controller
 
         return response()->json($events);
     }
+
+      public function destroy(Reservation $reservation)
+    {
+        // Borrar la reserva
+        $reservation->status = 'deleted';
+        $reservation->update();
+
+        // Redirigir con mensaje de éxito
+        return redirect()
+            ->route('reservations.index')
+            ->with('success', 'La reserva se eliminó correctamente.');
+    }
+
 }
